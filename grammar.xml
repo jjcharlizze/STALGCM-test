@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../print.xsl" ?>
+<?xml-stylesheet type="text/css" href="../rules.css"
+title="Easy editing stylesheet" ?>
+<!--
+Tagalog Grammar and Typo Rules for LanguageTool
+Rules are developed by: Luis Carlos, Jayhan Charlizze Esparas, Luzzia Magno
+Rules are based on the following sources:
+-->
+<rules lang="tl" xsi:noNamespaceSchemaLocation="../rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- Luis Carlos -->
+	<category name="Kambal-Katinig">
+		<rule id="Walang_KT" name="KaTee">
+			<pattern case_sensitive="yes" mark_from="0">
+				<token regexp="yes"><![CDATA[(?!(?:[A-Z]|direct|project|contact|impact|product|select|connect|abstract|contract|collect|district|conflict|effect|correct|object|subject))\b[a-z\-]+[aeiou][kc]t\b]]></token>
+			</pattern>
+			<message>Did you mean <suggestion><match no="1" regexp_match="(.*)[kc]t$" regexp_replace="$1k" /></suggestion>? If a word ends with "kt" or "ct", it should be shortened to "k".</message>
+			<short>KT should end in K</short>
+			<example correction="abstrak" type="incorrect">Ang <marker>abstrakt</marker> na konsepto.</example>
+			<example correction="konek" type="incorrect">Pwede pa <marker>konekt</marker> sa data mo?</example>
+			<example correction="konek" type="incorrect">Pwede pa <marker>konnect</marker> sa data mo?</example>
+			<example correction="korek" type="incorrect">Siguruhing <marker>korekt</marker> ang sagot.</example>
+			<example correction="korek" type="incorrect">Siguruhing <marker>korrect</marker> ang sagot.</example>
+			<example type="correct">Ang abstrak na konsepto.</example>
+			<example type="correct">Konek na ang signal.</example>
+			<example type="correct">Korek ang sagot.</example>
+			<example type="correct">Sabi niya direct message niya si kuya.</example>
+			<example type="correct"></example>
+			<example type="correct">Maayos ang employee kontrak na tanggap mo.</example>
+		</rule>
+
+		<!-- Luzzia Magno -->
+		<rule id="CH" name="ch to ts">
+			<pattern case_sensitive="yes" mark_from="0">
+				<token regexp="yes">[a-z]*(ch)[aeiou].*</token>
+			</pattern>
+			<message> Do you mean <suggestion><match no="1" regexp_match="(.*)ch(.*)" regexp_replace="$1ts$2"/></suggestion>? 
+				Words containing "ch" are replaced with "ts" in standard Filipino spelling.
+			</message>
+			<short>CH to TS</short>
+			<example correction="cheke" type="incorrect">Ginamit ko ang <marker>cheke</marker> para sa pagbayad ng utang.</example>
+			<example correction="chismis" type="incorrect">May <marker>chismis</marker> tungkol kay Aling Tuding noong isang araw.</example>
+			<example correction="achara" type="incorrect">Ang sarap ng <marker>achara</marker> ni nanay!</example>
+			<example type="correct">Ginamit ko ang tseke para sa pagbayad ng utang.</example>
+			<example type="correct">May tsismis tungkol kay Aling Tuding noong isang araw.</example>
+			<example type="correct">Ang sarap ng atsara ni nanay!</example>
+		</rule>
+	</category>
+
+	<!-- Jayhan Esparas -->
+	<category name="Enye">
+		<rule id="Ñ_NY" name="ñ (ny)">
+			<pattern case_sensitive="yes" mark_from="0">
+				<!-- Exception: words that start with a capital letter; hence, this only matches lowercase words -->
+				<token regexp="yes">[a-zñ]*[aeiou]ñ[aeiou].*
+					<!-- Exception: common religious names regardless of case -->
+					<exception scope="previous" regexp="yes" case_sensitive="no">nuestra|santo|sto|\.</exception>
+					<exception case_sensitive="no">peñafrancia</exception>
+				</token>
+			</pattern>
+			<message> Do you mean <suggestion><match no="1" case_conversion="startlower" regexp_match="(.*)ñ(.*)" regexp_replace="$1ny$2"/></suggestion>?
+				In standard Filipino spelling, the letter "ñ" between vowels is replaced with "ny".
+			</message>
+			<short>Enye</short>
+			<example correction="senyora" type="incorrect">Dumating na ang <marker>señora</marker>.</example>
+			<example type="correct">Dumating na ang <marker>senyora</marker>.</example>
+			<example type="correct">Nakita ko si Doña Victorina.</example>
+			<example type="correct">Nagdasal siya sa santo niño.</example>
+			<example type="correct">Dumalo kami sa pista ng peñafrancia.</example>
+		</rule>
+	</category>
+</rules>
