@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Spelling Checker</title>
+
+  <!-- Required for Word Add-ins -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+<body>
+  <h2>Spelling Checker</h2>
+
+  <button id="run">Run Spelling Check</button>
+
+  <script src="spellchecker.js"></script>
+
+  <script>
+    document.getElementById("run").onclick = applyRules;
+  </script>
+</body>
+</html>
